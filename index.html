@@ -18,9 +18,11 @@
       <h1 class="fw-bold">Monthly Money Calculator</h1>
     </div>
     <div class="row">
+      <!-- image section -->
       <div class="col-sm-7 add-bg img-fluid pe-5">
         <img src="img/bg1.jpg" alt="" />
       </div>
+      <!-- Income section -->
       <div class="col-sm-5 bg-light p-5">
         <div class="input-group flex-nowrap">
           <div class="input-group input-group-sm d-flex flex-column">
@@ -33,13 +35,13 @@
             </div>
             <div class="d-flex mb-3">
               <label for="inputEmail3" class="col-sm-3 col-form-label"
-                >income:</label
+                >Income:</label
               >
               <div class="col-sm-9">
                 <input
                   type="number"
                   class="form-control"
-                  id="inputEmail3"
+                  id="incomeValue"
                   placeholder="type number"
                 />
               </div>
@@ -59,7 +61,7 @@
                 <input
                   type="number"
                   class="form-control"
-                  id="inputEmail3"
+                  id="foodValue"
                   placeholder="type number"
                 />
               </div>
@@ -72,7 +74,7 @@
                 <input
                   type="number"
                   class="form-control"
-                  id="inputEmail3"
+                  id="rentValue"
                   placeholder="type number"
                 />
               </div>
@@ -85,28 +87,30 @@
                 <input
                   type="number"
                   class="form-control"
-                  id="inputEmail3"
+                  id="clothesValue"
                   placeholder="type number"
                 />
               </div>
             </div>
             <div class="d-flex justify-content-center mb-3">
-              <button type="button" class="btn btn-lg btn-primary">
-                Primary button
+              <button
+                type="button"
+                id="calculate"
+                class="btn btn-lg btn-primary ps-5 pe-5"
+              >
+                Calculate
               </button>
             </div>
             <div class="d-flex justify-content-center">
               <span
                 class="input-group-text border-0 bg-transparent fw-bold fs-5"
-                id="inputGroup-sizing-sm"
-                >Total Expenses: 0.0
+                >Total Expenses: <span id="expenses">0.0</span>
               </span>
             </div>
             <div class="d-flex justify-content-center mb-3">
               <span
                 class="input-group-text border-0 bg-transparent fw-bold fs-5"
-                id="inputGroup-sizing-sm"
-                >Balance: 0.0
+                >Balance: <span id="addBalance"> 0.0</span>
               </span>
             </div>
           </div>
