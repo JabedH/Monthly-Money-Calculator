@@ -9,3 +9,9 @@
 .text-color {
   color: #00bcd4;
 }
+/* responsive */
+@media only screen and (max-width: 600px) {
+  .add-bg img {
+    height: 415px;
+  }
+}
