@@ -67,18 +67,16 @@ document.getElementById("saveBtn").addEventListener("click", function () {
   const totalPercentage = savingAmountPercentage * convertIncomeValue;
 
   //Saving Amount
+  // ---
+  const balance = document.getElementById("addBalance");
+  const convertBalance = parseFloat(balance.innerText);
+  // ---
   const savingInnerText = document.getElementById("savingAmount");
   const convertSavingInnerText = parseFloat(savingInnerText.innerText);
   console.log(convertSavingInnerText);
   const totalSaving = convertSavingInnerText + totalPercentage;
-  savingInnerText.innerText = totalSaving;
-
-  // error message
-  const balance = document.getElementById("addBalance");
-  const convertBalance = parseFloat(balance.innerText);
-  const savingAlertMessage = document.getElementById("savingAlert");
-  if (totalSaving > convertBalance) {
-    savingAlertMessage.removeAttribute("hidden");
+  if (totalSaving < convertBalance) {
+    savingInnerText.innerText = totalSaving;
   }
   // Remaining Balance
   const remainingBalance = document.getElementById("remainingBalance");
@@ -87,5 +85,10 @@ document.getElementById("saveBtn").addEventListener("click", function () {
     const totalRemainingBalance =
       convertRemainingBalance + convertIncomeValue - totalPercentage;
     remainingBalance.innerText = totalRemainingBalance;
+  }
+  // error message
+  const savingAlertMessage = document.getElementById("savingAlert");
+  if (totalSaving > convertBalance) {
+    savingAlertMessage.removeAttribute("hidden");
   }
 });
