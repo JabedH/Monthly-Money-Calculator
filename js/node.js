@@ -12,7 +12,8 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
   const rentConvertValue = convertValue("rentValue");
   const clothesConvertValue = convertValue("clothesValue");
   const totalValue = foodConvertValue + rentConvertValue + clothesConvertValue;
-  // expenses 2nd value
+
+  // expenses
   const expensesValue = document.getElementById("expenses");
   const convertExpensesValue = parseFloat(expensesValue.innerText);
   const totalExpensesValue = convertExpensesValue + totalValue;
@@ -24,29 +25,42 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
   const totalConvertBalance =
     convertIncomeValue + convertBalance - totalExpensesValue;
   balance.innerText = totalConvertBalance;
+
+  // error message
+  const expensesAlertMessage = document.getElementById("expensesAlert");
+  if (totalExpensesValue > convertIncomeValue) {
+    expensesAlertMessage.removeAttribute("hidden");
+  }
 });
 // saving amount area
 document.getElementById("saveBtn").addEventListener("click", function () {
   console.log("clicked");
-  // get value from balance
-  const balance = document.getElementById("addBalance");
-  const convertBalance = parseFloat(balance.innerText);
+  // get value from input balance
+  const convertIncomeValue = convertValue("incomeValue");
   // calculate Percentage
   const getSavingAmount = convertValue("savingValue");
   const savingAmountPercentage = getSavingAmount / 100;
-  console.log("totalPercentage", savingAmountPercentage);
-  const totalPercentage = savingAmountPercentage * convertBalance;
+  const totalPercentage = savingAmountPercentage * convertIncomeValue;
 
   //Saving Amount
   const savingInnerText = document.getElementById("savingAmount");
   const convertSavingInnerText = parseFloat(savingInnerText.innerText);
   console.log(convertSavingInnerText);
-  savingInnerText.innerText = convertSavingInnerText + totalPercentage;
+  const totalSaving = convertSavingInnerText + totalPercentage;
+  savingInnerText.innerText = totalSaving;
 
   // Remaining Balance
   const remainingBalance = document.getElementById("remainingBalance");
   const convertRemainingBalance = parseFloat(remainingBalance.innerText);
   const totalRemainingBalance =
-    convertRemainingBalance + convertBalance - totalPercentage;
+    convertRemainingBalance + convertIncomeValue - totalPercentage;
   remainingBalance.innerText = totalRemainingBalance;
+
+  // error message
+  const balance = document.getElementById("addBalance");
+  const convertBalance = parseFloat(balance.innerText);
+  const savingAlertMessage = document.getElementById("savingAlert");
+  if (totalSaving > convertBalance) {
+    savingAlertMessage.removeAttribute("hidden");
+  }
 });
