@@ -85,7 +85,7 @@ document.getElementById("saveBtn").addEventListener("click", function () {
   const convertRemainingBalance = parseFloat(remainingBalance.innerText);
   if (totalSaving < convertBalance) {
     const totalRemainingBalance =
-      convertRemainingBalance + convertIncomeValue - totalPercentage;
+      convertRemainingBalance + convertBalance - totalPercentage;
     remainingBalance.innerText = totalRemainingBalance;
   }
   // error message
