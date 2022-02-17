@@ -5,14 +5,6 @@ function convertValue(valueId) {
   if (!isNaN(getValueConvert) && getValueConvert > 0) {
     return getValueConvert;
   }
-
-  const incomeAlertMessage = document.getElementById("incomeAlert");
-  if (getValueConvert < 0) {
-    incomeAlertMessage.removeAttribute("hidden");
-  }
-  if (isNaN(getValueConvert)) {
-    incomeAlertMessage.removeAttribute("hidden");
-  }
 }
 // total Expense and Income
 function totalExpenseIncome(convertIncomeValue, totalValue) {
@@ -23,12 +15,12 @@ function totalExpenseIncome(convertIncomeValue, totalValue) {
 
   // push the value to total balance
   const balance = document.getElementById("addBalance");
-
   const convertBalance = parseFloat(balance.innerText);
-
   const totalConvertBalance =
     convertIncomeValue + convertBalance - totalExpensesValue;
-  balance.innerText = totalConvertBalance;
+  if (totalExpensesValue < convertIncomeValue) {
+    balance.innerText = totalConvertBalance;
+  }
 
   // error message
   const expensesAlertMessage = document.getElementById("expensesAlert");
@@ -55,7 +47,17 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
   if ((totalValue || convertIncomeValue) < 0) {
     alert("please input valid number");
   }
+
+  // error message
+  const incomeAlertMessage = document.getElementById("incomeAlert");
+  if ((totalValue || convertIncomeValue) < 0) {
+    incomeAlertMessage.removeAttribute("hidden");
+  }
+  if (isNaN(totalValue || convertIncomeValue)) {
+    incomeAlertMessage.removeAttribute("hidden");
+  }
 });
+
 // saving amount area
 document.getElementById("saveBtn").addEventListener("click", function () {
   console.log("clicked");
