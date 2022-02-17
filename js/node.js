@@ -7,20 +7,26 @@ function convertValue(valueId) {
   }
 
   const incomeAlertMessage = document.getElementById("incomeAlert");
+  if (getValueConvert < 0) {
+    incomeAlertMessage.removeAttribute("hidden");
+  }
   if (isNaN(getValueConvert)) {
     incomeAlertMessage.removeAttribute("hidden");
   }
 }
 // total Expense and Income
-function totalExpenseIncome(totalValue, convertIncomeValue) {
+function totalExpenseIncome(convertIncomeValue, totalValue) {
   const expensesValue = document.getElementById("expenses");
   const convertExpensesValue = parseFloat(expensesValue.innerText);
   const totalExpensesValue = convertExpensesValue + totalValue;
   expensesValue.innerText = totalExpensesValue;
+  console.log(convertIncomeValue, "convertede");
 
   // push the value to total balance
   const balance = document.getElementById("addBalance");
+
   const convertBalance = parseFloat(balance.innerText);
+
   const totalConvertBalance =
     convertIncomeValue + convertBalance - totalExpensesValue;
   balance.innerText = totalConvertBalance;
@@ -31,7 +37,7 @@ function totalExpenseIncome(totalValue, convertIncomeValue) {
     expensesAlertMessage.removeAttribute("hidden");
   }
 }
-// Income and Expenses
+
 document.getElementById("calculateBtn").addEventListener("click", function () {
   // expenses area
   const foodConvertValue = convertValue("foodValue");
@@ -39,12 +45,16 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
   const clothesConvertValue = convertValue("clothesValue");
   const convertIncomeValue = convertValue("incomeValue");
   const totalValue = foodConvertValue + rentConvertValue + clothesConvertValue;
-  if ((totalValue || convertIncomeValue) > 0) {
-    totalExpenseIncome(totalValue, convertIncomeValue);
+
+  if (!isNaN(totalValue && convertIncomeValue)) {
+    totalExpenseIncome(convertIncomeValue, totalValue);
   }
   // alert Message
-  if (isNaN(convertIncomeValue)) {
-    alert("Please input valid number");
+  if (isNaN(totalValue || convertIncomeValue)) {
+    alert("please input valid number");
+  }
+  if ((totalValue || convertIncomeValue) < 0) {
+    alert("please input valid number");
   }
 });
 // saving amount area
@@ -65,17 +75,19 @@ document.getElementById("saveBtn").addEventListener("click", function () {
   savingInnerText.innerText = totalSaving;
 
   // Remaining Balance
-  const remainingBalance = document.getElementById("remainingBalance");
-  const convertRemainingBalance = parseFloat(remainingBalance.innerText);
-  const totalRemainingBalance =
-    convertRemainingBalance + convertIncomeValue - totalPercentage;
-  remainingBalance.innerText = totalRemainingBalance;
 
   // error message
   const balance = document.getElementById("addBalance");
   const convertBalance = parseFloat(balance.innerText);
   const savingAlertMessage = document.getElementById("savingAlert");
-  if (totalSaving < convertBalance) {
+  if (totalSaving > convertBalance) {
     savingAlertMessage.removeAttribute("hidden");
+  }
+  const remainingBalance = document.getElementById("remainingBalance");
+  const convertRemainingBalance = parseFloat(remainingBalance.innerText);
+  if (totalSaving < convertBalance) {
+    const totalRemainingBalance =
+      convertRemainingBalance + convertIncomeValue - totalPercentage;
+    remainingBalance.innerText = totalRemainingBalance;
   }
 });
