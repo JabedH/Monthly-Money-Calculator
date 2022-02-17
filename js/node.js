@@ -61,7 +61,7 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
 // saving amount area
 document.getElementById("saveBtn").addEventListener("click", function () {
   console.log("clicked");
-  // get value from input balance
+  // get value from input balance.
   const convertIncomeValue = convertValue("incomeValue");
   // calculate Percentage
   const getSavingAmount = convertValue("savingValue");
