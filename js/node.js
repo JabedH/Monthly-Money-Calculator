@@ -1,46 +1,52 @@
-//
-function convertValue(foodId, rentId, clothesId) {
-  const foodValue = document.getElementById(foodId);
-  const convertFoodValue = parseFloat(foodValue.value);
-  const rentValue = document.getElementById(rentId);
-  const convertRentValue = parseFloat(rentValue.value);
-  const clothesValue = document.getElementById(clothesId);
-  const convertClothesValue = parseFloat(clothesValue.value);
-  const totalValue = convertFoodValue + convertRentValue + convertClothesValue;
-  return totalValue;
+// convert Value
+function convertValue(valueId) {
+  const getValueId = document.getElementById(valueId);
+  const getValueConvert = parseFloat(getValueId.value);
+  return getValueConvert;
 }
-// expense function
-function getExpenses(convertFoodValue) {
-  //   const foodValue = document.getElementById(foodId);
-  //   const rentValue = document.getElementById(rentId);
-  //   const clothesValue = document.getElementById(itemId);
+
+// Income and Expenses
+document.getElementById("calculateBtn").addEventListener("click", function () {
+  // expenses area
+  const foodConvertValue = convertValue("foodValue");
+  const rentConvertValue = convertValue("rentValue");
+  const clothesConvertValue = convertValue("clothesValue");
+  const totalValue = foodConvertValue + rentConvertValue + clothesConvertValue;
+  // expenses 2nd value
   const expensesValue = document.getElementById("expenses");
   const convertExpensesValue = parseFloat(expensesValue.innerText);
-  const totalExpensesValue = convertExpensesValue + convertFoodValue;
+  const totalExpensesValue = convertExpensesValue + totalValue;
   expensesValue.innerText = totalExpensesValue;
-  return totalExpensesValue;
-}
-// ------------------
-document.getElementById("calculate").addEventListener("click", function () {
-  const totalExpensesValue = convertValue(
-    "foodValue",
-    "rentValue",
-    "clothesValue"
-  );
-  const foodExpensesValue = getExpenses(totalExpensesValue);
-  let incomeValue = document.getElementById("incomeValue").value;
-  let convertIncomeValue = parseFloat(incomeValue);
+  // push the value to total balance
+  const convertIncomeValue = convertValue("incomeValue");
   const balance = document.getElementById("addBalance");
   const convertBalance = parseFloat(balance.innerText);
-  balance.innerText = convertIncomeValue + convertBalance - totalExpensesValue;
+  const totalConvertBalance =
+    convertIncomeValue + convertBalance - totalExpensesValue;
+  balance.innerText = totalConvertBalance;
 });
+// saving amount area
+document.getElementById("saveBtn").addEventListener("click", function () {
+  console.log("clicked");
+  // get value from balance
+  const balance = document.getElementById("addBalance");
+  const convertBalance = parseFloat(balance.innerText);
+  // calculate Percentage
+  const getSavingAmount = convertValue("savingValue");
+  const savingAmountPercentage = getSavingAmount / 100;
+  console.log("totalPercentage", savingAmountPercentage);
+  const totalPercentage = savingAmountPercentage * convertBalance;
 
-// document.getElementById("calculate").addEventListener("click", function () {
-//   calculate expenses
-//   const foodValue = document.getElementById("foodValue");
-//   const convertFoodValue = parseFloat(foodValue.value);
-//   const expensesValue = document.getElementById("expenses");
-//   const convertExpensesValue = parseFloat(expensesValue.innerText);
-//   const totalExpensesValue = convertExpensesValue + convertFoodValue;
-//   expensesValue.innerText = totalExpensesValue;
-//calculate primary income
+  //Saving Amount
+  const savingInnerText = document.getElementById("savingAmount");
+  const convertSavingInnerText = parseFloat(savingInnerText.innerText);
+  console.log(convertSavingInnerText);
+  savingInnerText.innerText = convertSavingInnerText + totalPercentage;
+
+  // Remaining Balance
+  const remainingBalance = document.getElementById("remainingBalance");
+  const convertRemainingBalance = parseFloat(remainingBalance.innerText);
+  const totalRemainingBalance =
+    convertRemainingBalance + convertBalance - totalPercentage;
+  remainingBalance.innerText = totalRemainingBalance;
+});
