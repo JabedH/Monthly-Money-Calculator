@@ -11,7 +11,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <title>Document</title>
+    <title>Monthly Money Calculator</title>
   </head>
   <body class="container">
     <div class="mt-5 pb-5 d-flex justify-content-center text-color">
@@ -46,6 +46,7 @@
                 />
               </div>
             </div>
+            <!-- error message -->
             <div class="d-flex justify-content-center mb-3">
               <h5 id="negativeAlert" class="text-danger fs-6 fst-normal" hidden>
                 please input valid number
@@ -97,6 +98,7 @@
                 />
               </div>
             </div>
+            <!-- error message -->
             <div class="d-flex justify-content-center mb-3">
               <h5 id="incomeAlert" class="text-danger fs-6 fst-normal" hidden>
                 please input valid number
@@ -121,6 +123,7 @@
                 Balance: <span id="addBalance"> 0.0</span>
               </h3>
             </div>
+            <!-- error message -->
             <div class="d-flex justify-content-center mb-3">
               <h5 id="expensesAlert" class="text-danger" hidden>
                 Expenses amount higher than Income
@@ -164,6 +167,7 @@
             Remaining Balance: <span id="remainingBalance">0.0</span>
           </h3>
         </div>
+        <!-- error message -->
         <div class="d-flex justify-content-center mb-3">
           <h5 id="savingAlert" class="text-danger" hidden>
             saving amount higher than balance

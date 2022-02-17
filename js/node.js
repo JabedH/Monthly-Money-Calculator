@@ -68,11 +68,11 @@ document.getElementById("saveBtn").addEventListener("click", function () {
   const savingAmountPercentage = getSavingAmount / 100;
   const totalPercentage = savingAmountPercentage * convertIncomeValue;
 
-  //Saving Amount
-  // ---
+  // get Balance value
   const balance = document.getElementById("addBalance");
   const convertBalance = parseFloat(balance.innerText);
-  // ---
+
+  //Saving Amount
   const savingInnerText = document.getElementById("savingAmount");
   const convertSavingInnerText = parseFloat(savingInnerText.innerText);
   console.log(convertSavingInnerText);
