@@ -5,74 +5,57 @@ function convertValue(valueId) {
   if (!isNaN(getValueConvert) && getValueConvert > 0) {
     return getValueConvert;
   }
-  // if (isNaN(getValueConvert)) {
-  //   console.log("please insert a number");
-  // } else if (getValueConvert < 0) {
-  //   console.log("please insert possivtive number");
-  // } else if (!isNaN(getValueConvert) && getValueConvert > 0) {
-  //   return getValueConvert;
-  // }
-  // return getValueConvert;
-}
-
-// Income and Expenses
-document.getElementById("calculateBtn").addEventListener("click", function () {
-  // expenses area
-  const convertIncomeValue = convertValue("incomeValue");
 
   const incomeAlertMessage = document.getElementById("incomeAlert");
-  const negativeAlertMessage = document.getElementById("negativeAlert");
-  if (isNaN(convertIncomeValue)) {
+  if (isNaN(getValueConvert)) {
     incomeAlertMessage.removeAttribute("hidden");
   }
-  if (isNaN(convertIncomeValue)) {
-    alert("Please input valid number");
-  }
-
-  if (incomeAlertMessage > 0) {
-    negativeAlertMessage.removeAttribute("hidden");
-  }
-  if (convertIncomeValue > 0) {
-    newConvertIncomeValue = convertIncomeValue;
-  }
-  const foodConvertValue = convertValue("foodValue");
-  const rentConvertValue = convertValue("rentValue");
-  const clothesConvertValue = convertValue("clothesValue");
-  const totalValue = foodConvertValue + rentConvertValue + clothesConvertValue;
-  if (!isNaN(totalValue) && totalValue > 0) {
-    newTotalValue = totalValue;
-  }
-  if (isNaN(totalValue)) {
-    incomeAlertMessage.removeAttribute("hidden");
-  }
-  // expenses
+}
+// total Expense and Income
+function totalExpenseIncome(totalValue, convertIncomeValue) {
   const expensesValue = document.getElementById("expenses");
   const convertExpensesValue = parseFloat(expensesValue.innerText);
-  const totalExpensesValue = convertExpensesValue + newTotalValue;
+  const totalExpensesValue = convertExpensesValue + totalValue;
   expensesValue.innerText = totalExpensesValue;
-  // push the value to total balance
 
+  // push the value to total balance
   const balance = document.getElementById("addBalance");
   const convertBalance = parseFloat(balance.innerText);
   const totalConvertBalance =
-    newConvertIncomeValue + convertBalance - totalExpensesValue;
+    convertIncomeValue + convertBalance - totalExpensesValue;
   balance.innerText = totalConvertBalance;
 
   // error message
   const expensesAlertMessage = document.getElementById("expensesAlert");
-  if (totalExpensesValue > newConvertIncomeValue) {
+  if (totalExpensesValue > convertIncomeValue) {
     expensesAlertMessage.removeAttribute("hidden");
+  }
+}
+// Income and Expenses
+document.getElementById("calculateBtn").addEventListener("click", function () {
+  // expenses area
+  const foodConvertValue = convertValue("foodValue");
+  const rentConvertValue = convertValue("rentValue");
+  const clothesConvertValue = convertValue("clothesValue");
+  const convertIncomeValue = convertValue("incomeValue");
+  const totalValue = foodConvertValue + rentConvertValue + clothesConvertValue;
+  if ((totalValue || convertIncomeValue) > 0) {
+    totalExpenseIncome(totalValue, convertIncomeValue);
+  }
+  // alert Message
+  if (isNaN(convertIncomeValue)) {
+    alert("Please input valid number");
   }
 });
 // saving amount area
 document.getElementById("saveBtn").addEventListener("click", function () {
   console.log("clicked");
   // get value from input balance
-  const newConvertIncomeValue = convertValue("incomeValue");
+  const convertIncomeValue = convertValue("incomeValue");
   // calculate Percentage
   const getSavingAmount = convertValue("savingValue");
   const savingAmountPercentage = getSavingAmount / 100;
-  const totalPercentage = savingAmountPercentage * newConvertIncomeValue;
+  const totalPercentage = savingAmountPercentage * convertIncomeValue;
 
   //Saving Amount
   const savingInnerText = document.getElementById("savingAmount");
@@ -85,14 +68,14 @@ document.getElementById("saveBtn").addEventListener("click", function () {
   const remainingBalance = document.getElementById("remainingBalance");
   const convertRemainingBalance = parseFloat(remainingBalance.innerText);
   const totalRemainingBalance =
-    convertRemainingBalance + newConvertIncomeValue - totalPercentage;
+    convertRemainingBalance + convertIncomeValue - totalPercentage;
   remainingBalance.innerText = totalRemainingBalance;
 
   // error message
   const balance = document.getElementById("addBalance");
   const convertBalance = parseFloat(balance.innerText);
   const savingAlertMessage = document.getElementById("savingAlert");
-  if (totalSaving > convertBalance) {
+  if (totalSaving < convertBalance) {
     savingAlertMessage.removeAttribute("hidden");
   }
 });
