@@ -20,7 +20,6 @@ function totalExpenseIncome(convertIncomeValue, totalValue) {
   const convertExpensesValue = parseFloat(expensesValue.innerText);
   const totalExpensesValue = convertExpensesValue + totalValue;
   expensesValue.innerText = totalExpensesValue;
-  console.log(convertIncomeValue, "convertede");
 
   // push the value to total balance
   const balance = document.getElementById("addBalance");
@@ -74,8 +73,6 @@ document.getElementById("saveBtn").addEventListener("click", function () {
   const totalSaving = convertSavingInnerText + totalPercentage;
   savingInnerText.innerText = totalSaving;
 
-  // Remaining Balance
-
   // error message
   const balance = document.getElementById("addBalance");
   const convertBalance = parseFloat(balance.innerText);
@@ -83,6 +80,7 @@ document.getElementById("saveBtn").addEventListener("click", function () {
   if (totalSaving > convertBalance) {
     savingAlertMessage.removeAttribute("hidden");
   }
+  // Remaining Balance
   const remainingBalance = document.getElementById("remainingBalance");
   const convertRemainingBalance = parseFloat(remainingBalance.innerText);
   if (totalSaving < convertBalance) {
